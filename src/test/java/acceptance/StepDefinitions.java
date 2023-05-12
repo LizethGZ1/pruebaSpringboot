@@ -1,5 +1,5 @@
 package acceptance;
-
+package io.cucumber.java.en;
 import org.springframework.web.client.RestTemplate;
 
 import io.cucumber.java.en.Given;

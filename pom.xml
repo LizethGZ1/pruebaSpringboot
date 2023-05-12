@@ -9,10 +9,10 @@
 		<relativePath/>
 		<!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.termometer</groupId>
-	<artifactId>termometer</artifactId>
+	<groupId>com.juanma</groupId>
+	<artifactId>juanma</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>example</name>
+	<name>calculator</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

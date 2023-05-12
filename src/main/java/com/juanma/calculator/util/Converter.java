@@ -1,4 +1,4 @@
-package com.termometer.example.util;
+package com.juanma.calculator.util;
 
 import org.springframework.stereotype.Component;
 

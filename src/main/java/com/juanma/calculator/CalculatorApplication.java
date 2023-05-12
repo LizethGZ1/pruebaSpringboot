@@ -20,7 +20,7 @@ public class CalculatorApplication {
 	public static void main(String[] args){
 		SpringApplication.run(CalculatorApplication.class, args);
 	}
-	 @Autowired
-    private Converter converter;
-
+	public static void printHello() {
+    System.out.println("Hello");
+  }
 }

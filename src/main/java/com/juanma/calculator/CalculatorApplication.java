@@ -1,5 +1,4 @@
 package com.juanma.calculator;
-package org.junit.jupiter.api;
 
 import com.termometer.example.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;

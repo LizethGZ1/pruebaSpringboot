@@ -35,7 +35,7 @@ pipeline {
         stage ("Docker login") {
             steps {
                 script{
-                    sh "docker login -u="lgonzalezz" -p="Iniesta06;" prueba-repo"
+                    sh "docker login -u='lgonzalezz' -p='Iniesta06;'"
 "
                 }
             }

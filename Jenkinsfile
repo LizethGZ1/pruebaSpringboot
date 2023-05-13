@@ -26,7 +26,10 @@ pipeline {
         }
         stage ("Docker build") {
             steps {
-                sh "docker build -t juanmamacgyvercode/calculator ."
+                script{
+                sh "docker build -f pruebaSpringboot/Dockerfile -t lgonzalezz/prueba-repo:1.0.0-${BUILD_ID} pruebaSpringboot"
+                }
+                
             }
         }
         stage ("Docker login") {
@@ -39,7 +42,7 @@ pipeline {
         }
         stage ("Docker push") {
             steps {
-                sh "docker push juanmamacgyvercode/calculator"
+                sh "docker push lgonzalezz/prueba-repo:1.0.0-${BUILD_ID}"
             }
         }
         stage ("Deploy to staging") {

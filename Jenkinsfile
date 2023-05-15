@@ -36,7 +36,6 @@ pipeline {
             steps {
                 script{
                     sh "docker login -u='lgonzalezz' -p='Iniesta06;'"
-"
                 }
             }
         }

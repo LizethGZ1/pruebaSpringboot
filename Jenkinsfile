@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+    triggers {
+        pollSCM('* * * * *')
+    }
     stages {
         stage("Compile") {
             steps {
@@ -19,7 +21,7 @@ pipeline {
         }
         stage ("Probar si funciona Docker") {
             steps {
-                sh "docker version"
+                sh "docker --version"
             }
         }
         stage ("Docker build") {
@@ -34,7 +36,6 @@ pipeline {
             steps {
                 script{
                     sh "docker login -u='lgonzalezz' -p='Iniesta06;'"
-                    echo "user: "${USER}
                 }
             }
         }

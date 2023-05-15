@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    triggers {
-        pollSCM('* * * * *')
-    }
+    
     stages {
         stage("Compile") {
             steps {
@@ -36,6 +34,7 @@ pipeline {
             steps {
                 script{
                     sh "docker login -u='lgonzalezz' -p='Iniesta06;'"
+                    echo "user: "${USER}
                 }
             }
         }

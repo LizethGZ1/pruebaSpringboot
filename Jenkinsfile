@@ -19,9 +19,19 @@ pipeline {
         	    sh "./gradlew build"
         	}
         }
+        stage('Maven Install') {
+    	agent {
+      	docker {
+        	image 'maven:3.5.0'
+        }
+      }
+      steps {
+      	sh 'mvn clean install'
+      }
+    }
         stage ("Probar si funciona Docker") {
             steps {
-                sh "docker --version"
+                sh "docker version"
             }
         }
         stage ("Docker build") {

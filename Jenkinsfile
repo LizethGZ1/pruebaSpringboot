@@ -1,69 +1,18 @@
 pipeline {
     agent any
     stages {
-        stage("Compile") {
-            steps {
-                sh "./gradlew compileJava"
-            }
-        }
-        stage("Unit test") {
-            steps {
-                sh "./gradlew test"
-            }
-        }
-        stage ("Package") {
-            steps {
-        	    sh "./gradlew build"
-        	}
-        }
-        stage ("Probar si funciona Docker") {
-            steps {
-                docker run --privileged
-                sh "docker version"
-            }
-        }
-        stage ("Docker build") {
-            steps {
-                script{
-                sh "docker build -f pruebaSpringboot/Dockerfile -t lgonzalezz/prueba-repo:1.0.0-${BUILD_ID} pruebaSpringboot"
-                }
-                
-            }
-        }
-        stage ("Docker login") {
-            steps {
-                script{
-                    sh "docker login -u='lgonzalezz' -p='Iniesta06;'"
+        stage('Build') {
+            agent {
+                docker {
+                    image 'gradle:6.7-jdk11'
+                    // Run the container on the node specified at the
+                    // top-level of the Pipeline, in the same workspace,
+                    // rather than on a new node entirely:
+                    reuseNode true
                 }
             }
-        }
-        stage ("Docker push") {
             steps {
-                sh "docker push lgonzalezz/prueba-repo:1.0.0-${BUILD_ID}"
-            }
-        }
-        stage ("Deploy to staging") {
-            steps {
-                sh "docker run -d --rm -p 8765:8080 --name calculatorStaging juanmamacgyvercode/calculator"
-            }
-        }
-        // Si quieres que Jenkins haga un rest de aceptación de una repo docker, no uses localhost, usa tu IP.
-        /*stage ("Prueba") {
-                    steps {
-                        sleep 20
-                        sh "curl -i \"192.168.2.89:8765/sum?a=1&b=2\""
-                    }
-                }*/
-        stage ("Acceptance test") {
-            steps {
-                sleep 60
-                sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
-
-            }
-            post {
-                always {
-                    sh "docker stop calculatorStaging"
-                }
+                sh 'gradle --version'
             }
         }
     }

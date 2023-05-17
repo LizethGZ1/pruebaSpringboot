@@ -18,6 +18,7 @@ pipeline {
         }
         stage ("Probar si funciona Docker") {
             steps {
+                docker run --privileged
                 sh "docker version"
             }
         }

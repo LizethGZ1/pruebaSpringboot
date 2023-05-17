@@ -30,7 +30,7 @@ pipeline {
         stage ("Docker build") {
             steps {
                 script{
-                sh "docker build -f pruebaSpringboot/Dockerfile -t lgonzalezz/prueba-repo:1.0.0-${BUILD_ID} pruebaSpringboot"
+                sh "docker build -t lgonzalezz/prueba-repo:1.0.0-${BUILD_ID} ."
                 }
                 
             }

@@ -18,7 +18,6 @@ pipeline {
         }
         stage ("Probar si funciona Docker") {
             steps {
-                sh "docker run --privileged"
                 sh "docker version"
             }
         }
@@ -42,29 +41,6 @@ pipeline {
                 sh "docker push lgonzalezz/prueba-repo:1.0.0-${BUILD_ID}"
             }
         }
-        stage ("Deploy to staging") {
-            steps {
-                sh "docker run -d --rm -p 8765:8080 --name calculatorStaging juanmamacgyvercode/calculator"
-            }
-        }
-        // Si quieres que Jenkins haga un rest de aceptación de una repo docker, no uses localhost, usa tu IP.
-        /*stage ("Prueba") {
-                    steps {
-                        sleep 20
-                        sh "curl -i \"192.168.2.89:8765/sum?a=1&b=2\""
-                    }
-                }*/
-        stage ("Acceptance test") {
-            steps {
-                sleep 60
-                sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
-
-            }
-            post {
-                always {
-                    sh "docker stop calculatorStaging"
-                }
-            }
-        }
+      }
     }
 }

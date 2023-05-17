@@ -41,6 +41,4 @@ pipeline {
                 sh "docker push lgonzalezz/prueba-repo:1.0.0-${BUILD_ID}"
             }
         }
-      }
-    }
 }

@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools{
+        jdk 'openJDK'
+        maven 'MavenTool'
+    }
     stages {
         stage("Compile") {
             steps {
@@ -18,8 +22,8 @@ pipeline {
         }
         stage ("Probar si funciona Docker") {
             steps {
-            withDockerRegistry(credentialsId:"dockerHub") {
-                sh "docker version"
+            withDockerRegistry(credentialsId: 'dockerHub') {
+            sh "docker version"
             }
             }
         }

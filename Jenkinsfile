@@ -5,7 +5,7 @@ pipeline {
         
     }
     environment {
-    DOCKER_CERT_PATH = credentials('DockerTool')
+    
     }
     stages {
         stage("Compile") {

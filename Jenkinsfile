@@ -9,16 +9,19 @@ pipeline {
         stage("Compile") {
             steps {
                 sh "./gradlew compileJava"
+                sh "echo _____________________________________"
             }
         }
         stage("Unit test") {
             steps {
                 sh "./gradlew test"
+                sh "echo _____________________________________"
             }
         }
         stage ("Package") {
             steps {
         	    sh "./gradlew build"
+                sh "echo _____________________________________"
         	}
         }
         stage ("Probar si funciona Docker") {
@@ -26,6 +29,7 @@ pipeline {
                 script{
                     withDockerRegistry(credentialsId: 'dockerHub') {
                     sh "docker version"
+                    sh "echo _____________________________________"
                     }
                 }
             }
@@ -34,6 +38,7 @@ pipeline {
             steps {
                 script{
                 sh "docker build -t lgonzalezz/prueba-repo:1.0.0-${BUILD_ID} ."
+                sh "echo _____________________________________"
                 }
                 
             }
@@ -42,6 +47,7 @@ pipeline {
             steps {
                 script{
                     sh "docker login -u='lgonzalezz' -p='Iniesta06;'"
+                    sh "echo _____________________________________"
                 }
             }
         }

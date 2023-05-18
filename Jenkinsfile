@@ -21,9 +21,11 @@ pipeline {
         }
         stage ("Probar si funciona Docker") {
             steps {
-            withDockerRegistry(credentialsId: 'dockerHub') {
-            sh "docker version"
-            }
+                script{
+                    withDockerRegistry(credentialsId: 'dockerHub') {
+                    sh "docker version"
+                    }
+                }
             }
         }
         stage ("Docker build") {

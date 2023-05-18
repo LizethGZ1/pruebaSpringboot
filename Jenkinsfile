@@ -24,6 +24,14 @@ pipeline {
                 sh "echo _____________________________________"
         	}
         }
+        stage ("Docker login") {
+            steps {
+                script{
+                    sh "docker login -u='lgonzalezz' -p='Iniesta06;'"
+                    sh "echo _____________________________________"
+                }
+            }
+        }
         stage ("Probar si funciona Docker") {
             steps {
                 script{
@@ -43,14 +51,7 @@ pipeline {
                 
             }
         }
-        stage ("Docker login") {
-            steps {
-                script{
-                    sh "docker login -u='lgonzalezz' -p='Iniesta06;'"
-                    sh "echo _____________________________________"
-                }
-            }
-        }
+        
         stage ("Docker push") {
             steps {
                 sh "docker push lgonzalezz/prueba-repo:1.0.0-${BUILD_ID}"

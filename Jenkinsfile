@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    someTool{
+    tools{
         maven 'MavenTool'
-        'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+        
     }
     environment {
     DOCKER_CERT_PATH = credentials('DockerTool')

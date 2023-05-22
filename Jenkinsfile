@@ -24,21 +24,11 @@ pipeline {
                 sh "echo _____________________________________"
         	}
         }
-        stage('Code Quality Check via SonarQube') {
-   steps {
-       script {
-       def scannerHome = tool 'sonarqube';
-           withSonarQubeEnv("sonarqube-container") {
-           sh "${tool("sonarqube")}/bin/sonar-scanner \
-           -Dsonar.projectKey=test-node-js \
-           -Dsonar.sources=. \
-           -Dsonar.css.node=. \
-           -Dsonar.host.url=http://localhost/:9000 \
-           -Dsonar.login=your-generated-token-from-sonarqube-container"
-               }
-           }
-       }
-   }
+        stage('SonarQube analysis') {
+    withSonarQubeEnv(credentialsId: 'squ_29a59416786ea820dfae88b427fd383eb6980d8b', installationName: 'SonarQubeServer') { // You can override the credential to be used
+      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+    }
+  }
    stage("Install Project Dependencies") {
    steps {
        nodejs(nodeJSInstallationName: 'nodenv'){

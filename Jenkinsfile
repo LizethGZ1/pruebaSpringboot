@@ -25,8 +25,10 @@ pipeline {
         	}
         }
         stage('SonarQube analysis') {
+        steps {
     withSonarQubeEnv(credentialsId: 'squ_29a59416786ea820dfae88b427fd383eb6980d8b', installationName: 'SonarQubeServer') { // You can override the credential to be used
       sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+    }
     }
   }
    stage("Install Project Dependencies") {
